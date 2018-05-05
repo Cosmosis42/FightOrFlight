@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1285768905839862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.31, y: 2.88, z: 0.19593947}
+  m_LocalPosition: {x: -14.26, y: -3.08, z: 0.19593947}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,7 +58,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9d4cedbbf206f234ba595a92e7f965d8, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -71,7 +71,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1285768905839862}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 11f1fdae5333d474abedf65365ca4bbd, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -99,8 +99,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8039b5eb6f9abf4f936fd42fc11f6bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flapStren: 100
+  flapStren: 150
+  diveStren: 50
   moveSpeed: 8
+  maxSpeed: 30
+  wallLeft: -22.75
+  wallRight: 23
+  floor: -13.25
+  roof: 13.25
+  bounciness: 300
+  flyCon: Fly1
+  runCon: Run1
+  diveCon: Dive1
 --- !u!212 &212350896346125448
 SpriteRenderer:
   m_ObjectHideFlags: 1
