@@ -4,105 +4,170 @@ using UnityEngine;
 
 public enum Direction
 {
-    LEFT, RIGHT
+	LEFT, RIGHT
 }
 
-public class BirdController : MonoBehaviour {
-    private Rigidbody2D rb2D;
-    private Direction facing = Direction.RIGHT;
-    private bool dashing = false;
-    public float flapStren = 10;
-    public float maxSpeed = 250;
-    public float dashSpeed = 100;
-    public float wallLeft, wallRight, floor, roof, bounciness, dashTime;
+public class BirdController : MonoBehaviour
+{
+	private Rigidbody2D rb2D;
+	private Direction facing = Direction.RIGHT;
+	private bool dashing = false;
+    public bool grappled = false;
+    private bool grapCooldown = false;
+	public float flapStren = 10;
+	public float maxSpeed = 250;
+	public float dashSpeed = 100;
+	public float wallLeft, wallRight, floor, roof, bounciness, dashTime, grapTime;
 
-    [Header("Controls")]
-    public string flyCon = "Fly";
-    public string runCon = "Run";
-    public string LDash = "LDash";
-    public string RDash = "RDash";
-    public string vertCon = "Vertical";
+	[Header("References")]
+	public Player player;
 
-    // Use this for initialization
-    void Start () {
-        rb2D = GetComponent<Rigidbody2D>();
+	[Header("Controls")]
+	public string flyCon = "Fly";
+	public string runCon = "Run";
+	public string LDash = "LDash";
+	public string RDash = "RDash";
+	public string vertCon = "Vertical";
+    public string Grab = "Grab";
+
+	// Use this for initialization
+	void Start()
+	{
+		rb2D = GetComponent<Rigidbody2D>();
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void Update()
+	{
 
-        // Don't let velocity exceed maxSpeed
-        rb2D.velocity = Vector3.ClampMagnitude(rb2D.velocity, maxSpeed);
+		// Don't let velocity exceed maxSpeed
+		rb2D.velocity = Vector3.ClampMagnitude(rb2D.velocity, maxSpeed);
 
-        // Pressing space will flap your wings, giving you upward thrust
-        // Pressing shift will give you downward thrust
-        if (Input.GetButtonDown(flyCon))
+		// Pressing space will flap your wings, giving you upward thrust
+		// Pressing shift will give you downward thrust
+		if (Input.GetButtonDown(flyCon))
+		{
+			Vector2 flyDir = new Vector2(Input.GetAxis(runCon), Input.GetAxis(vertCon));
+			flyDir.Normalize();
+			rb2D.AddForce(flyDir * flapStren);
+
+			if (Input.GetAxis(runCon) > 0)
+				facing = Direction.RIGHT;
+			else
+				facing = Direction.LEFT;
+		}
+
+		// If the bird goes outside of bounds, move it to the other side
+		if (transform.position.x < wallLeft)
+		{
+			Vector3 newPos = new Vector3(wallRight, transform.position.y, transform.position.z);
+
+			transform.SetPositionAndRotation(newPos, transform.rotation);
+		}
+		else if (transform.position.x > wallRight)
+		{
+			Vector3 newPos = new Vector3(wallLeft, transform.position.y, transform.position.z);
+
+			transform.SetPositionAndRotation(newPos, transform.rotation);
+		}
+		else if (transform.position.y < floor)
+		{
+			Vector3 newPos = new Vector3(transform.position.x, roof, transform.position.z);
+
+			transform.SetPositionAndRotation(newPos, transform.rotation);
+		}
+
+        if (transform.childCount != 0 && Input.GetAxis(Grab) == 0)
         {
-            Vector2 flyDir = new Vector2(Input.GetAxis(runCon), Input.GetAxis(vertCon));
-            flyDir.Normalize();
-            rb2D.AddForce(flyDir * flapStren);
-
-            if (Input.GetAxis(runCon) > 0)
-                facing = Direction.RIGHT;
-            else
-                facing = Direction.LEFT;
-        }
-
-        // If the bird goes outside of bounds, move it to the other side
-        if (transform.position.x < wallLeft)
-        {
-            Vector3 newPos = new Vector3(wallRight, transform.position.y, transform.position.z);
-
-            transform.SetPositionAndRotation(newPos, transform.rotation);
-        }
-        else if (transform.position.x > wallRight)
-        {
-            Vector3 newPos = new Vector3(wallLeft, transform.position.y, transform.position.z);
-
-            transform.SetPositionAndRotation(newPos, transform.rotation);
-        }
-        else if (transform.position.y < floor)
-        {
-            Vector3 newPos = new Vector3(transform.position.x, roof, transform.position.z);
-
-            transform.SetPositionAndRotation(newPos, transform.rotation);
+            transform.GetChild(0).GetComponent<Rigidbody2D>().simulated = true;
+            transform.GetChild(0).parent = null;
         }
 
         // Use the bumpers to dash left and right
         if (Input.GetButtonDown(RDash) || Input.GetButtonDown(LDash))
-            StartCoroutine(Dash(dashTime));
-    }
-
-    public IEnumerator Dash(float time)
-    {
-        if (!dashing)
         {
-            dashing = true;
-
-            if (Input.GetAxis(runCon) > 0)
-                facing = Direction.RIGHT;
-            else if (Input.GetAxis(runCon) < 0)
-                facing = Direction.LEFT;
-
-            Vector2 dir = new Vector2(Input.GetAxis(runCon), Input.GetAxis(vertCon));
-            rb2D.velocity = dir.normalized * dashSpeed;
-
-            yield return new WaitForSeconds(time);
-
-            rb2D.velocity = new Vector2(0.0f, 0.0f);
-
-            dashing = false;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            if (dashing == true)
+            if (grappled && !grapCooldown)
             {
-                print(message: "You have damaged " + collision.gameObject.name);
+                transform.parent = null;
+                rb2D.simulated = true;
+            }
+
+            StartCoroutine(Dash(dashTime));
+        }
+	}
+
+	public IEnumerator Dash(float time)
+	{
+		if (!dashing)
+		{
+			dashing = true;
+
+			if (Input.GetAxis(runCon) > 0)
+				facing = Direction.RIGHT;
+			else if (Input.GetAxis(runCon) < 0)
+				facing = Direction.LEFT;
+
+			Vector2 dir = new Vector2(Input.GetAxis(runCon), Input.GetAxis(vertCon));
+			rb2D.velocity = dir.normalized * dashSpeed;
+
+			yield return new WaitForSeconds(time);
+
+			rb2D.velocity = new Vector2(0.0f, 0.0f);
+
+			dashing = false;
+		}
+	}
+
+    public IEnumerator Grappled(float time)
+    {
+        grapCooldown = true;
+
+        yield return new WaitForSeconds(time);
+
+        grapCooldown = false;
+    }
+
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (collision.gameObject.tag == "Player")
+		{
+            if (Input.GetAxis(Grab) == 0)
+            {
+                if (dashing)
+                {
+                    print(message: "You have damaged " + collision.gameObject.name);
+
+                    var otherPlayer = collision.gameObject.GetComponent<BirdController>();
+
+                    if (otherPlayer != null)
+                    {
+                        otherPlayer.player.Attack(player);
+					Game.Instance.DropFeathers(collision.transform.position);
+				}
+				else
+				{
+					Game.Instance.DropFeathers(transform.position);
+                    }
+                }
+            }
+            print(Input.GetAxis(Grab) + this.name);
+            if (Input.GetAxis(Grab) != 0)
+            {
+                Vector3 contactPoint = collision.contacts[0].point;
+                Vector3 center = collision.collider.bounds.center;
+
+                bool top = contactPoint.y > (center.y + (collision.transform.lossyScale.y / 2.25));
+                bool middle = (contactPoint.x < (center.x + collision.transform.lossyScale.x / 2)
+                                   && contactPoint.x > center.x - (collision.transform.lossyScale.x / 2));
+                print(top + " " + middle + " " + this.name);
+                if (top && middle)
+                {
+                    collision.rigidbody.simulated = false;
+                    collision.transform.parent = transform;
+                    collision.gameObject.GetComponent<BirdController>().grappled = true;
+                }
+                StartCoroutine(collision.gameObject.GetComponent<BirdController>().Grappled(grapTime));
             }
         }
-    }
+	}
 }

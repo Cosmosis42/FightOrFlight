@@ -10,19 +10,19 @@ public class Player : MonoBehaviour
 	public Transform StartingPosition;
 
 	public HpBar HpBar;
-	public StaminaBar StaminaBar;
+	//public StaminaBar StaminaBar;
 
-	// Trigger collider, used for picking up power ups and attacking
-	public Collider Trigger;
+	public BirdController Controller;
 
 	[Header("Stats")]
 	public int MaxHp = 10;
 	public int CurrentHp = 10;
 
-	public float MaxStamina;
-	public float CurrentStamina;
+	public float MaxStamina = 10;
+	public float CurrentStamina = 10;
+	public float StaminaRegen = 2;
 
-	public int Damage;
+	public int Damage = 1;
 
 	#region HP and Stamina
 
@@ -39,6 +39,8 @@ public class Player : MonoBehaviour
 	{
 		CurrentHp -= value;
 
+		if (CurrentHp > MaxHp)
+			CurrentHp = MaxHp;
 		// Play relevant effect
 
 		UpdateHpBar();
@@ -53,6 +55,8 @@ public class Player : MonoBehaviour
 	{
 		CurrentStamina += value;
 
+		if (CurrentStamina > MaxStamina)
+			CurrentStamina = MaxStamina;
 		// Play relevant animation
 		UpdateStaminaBar();
 	}
@@ -66,17 +70,18 @@ public class Player : MonoBehaviour
 
 	private void UpdateStaminaBar()
 	{
-		StaminaBar.SetStamina(CurrentStamina);
+		//StaminaBar.SetStamina(CurrentStamina);
 	}
 	#endregion
 
-	public void MakeAttack()
+	public void Attack(Player attacker)
 	{
 		// Play animation
 
 		// Get nearby player object.
 
 		// Send attack to player
+		ReduceHp(attacker.Damage);
 
 		// Reduce stamina
 		ReduceStamina(1);
@@ -89,30 +94,24 @@ public class Player : MonoBehaviour
 
 	public void Init()
 	{
-		transform.SetPositionAndRotation(StartingPosition.position, StartingPosition.rotation);
+		Controller.transform.SetPositionAndRotation(StartingPosition.position, StartingPosition.rotation);
 
 		CurrentHp = MaxHp;
 		CurrentStamina = MaxStamina;
 
 		HpBar.Initialize(MaxHp);
-		StaminaBar.Initialize(MaxStamina);
+		//StaminaBar.Initialize(MaxStamina);
 	}
 
 	void Update()
 	{
 		// Regenerate stamina
-	}
+		if (CurrentStamina < MaxStamina)
+		{
+			var delta = StaminaRegen * Time.deltaTime;
 
-	void OnTriggerEnter(Collider other)
-	{
-		// If powerup then take
-
-		// If player then keep track of player.
-	}
-
-	void OnTriggerExit()
-	{
-
+			AddStamina(delta);
+		}
 	}
 }
 

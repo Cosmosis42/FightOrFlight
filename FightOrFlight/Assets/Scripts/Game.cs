@@ -12,9 +12,17 @@ public class Game : MonoBehaviour
 
 	public Player Player2;
 
+	public GameObject featherEffectPrefab;
+
 	void Awake()
 	{
 		Instance = this;
+	}
+
+	void Start()
+	{
+		StartGame();
+
 	}
 
 	void OnDestroy()
@@ -32,19 +40,14 @@ public class Game : MonoBehaviour
 		// Player animation
 	}
 
-	public void RegisterAttack(Player player)
+	public void DropFeathers(Vector3 position)
 	{
-		// Figure out if bird is in range.
-		Player other;
-		if (player == Player1)
-			other = Player2;
-		else
-			other = Player1;
-
-		// IF IN RANGE
-		// Apply damage
-		// Play UI animations
+		Instantiate(featherEffectPrefab, position, Quaternion.identity);
 	}
 
+	public void TestFeathers()
+	{
+		DropFeathers(Vector3.zero);
+	}
 }
 
