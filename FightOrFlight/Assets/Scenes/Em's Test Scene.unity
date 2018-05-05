@@ -275,7 +275,7 @@ Prefab:
     - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
         type: 2}
       propertyPath: flapStren
-      value: 150
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
         type: 2}
@@ -286,6 +286,16 @@ Prefab:
         type: 2}
       propertyPath: RDash
       value: RDash2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
+        type: 2}
+      propertyPath: vertCon
+      value: Vertical2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
+        type: 2}
+      propertyPath: dashSpeed
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 273dfea17158d334497f3686a55380b2, type: 2}
@@ -487,6 +497,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 50775543438973676, guid: 273dfea17158d334497f3686a55380b2,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 9d4cedbbf206f234ba595a92e7f965d8, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 273dfea17158d334497f3686a55380b2, type: 2}
   m_IsPrefabParent: 0
