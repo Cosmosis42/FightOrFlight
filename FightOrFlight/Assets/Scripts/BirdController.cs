@@ -12,8 +12,6 @@ public class BirdController : MonoBehaviour {
     private Direction facing = Direction.RIGHT;
     private bool dashing = false;
     public float flapStren = 10;
-    public float diveStren = 10;
-    public float moveSpeed = 10;
     public float maxSpeed = 250;
     public float dashSpeed = 100;
     public float wallLeft, wallRight, floor, roof, bounciness, dashTime;
@@ -21,7 +19,6 @@ public class BirdController : MonoBehaviour {
     [Header("Controls")]
     public string flyCon = "Fly";
     public string runCon = "Run";
-    public string diveCon = "Dive";
     public string LDash = "LDash";
     public string RDash = "RDash";
     public string vertCon = "Vertical";
@@ -39,42 +36,16 @@ public class BirdController : MonoBehaviour {
 
         // Pressing space will flap your wings, giving you upward thrust
         // Pressing shift will give you downward thrust
-        if (Input.GetKeyDown("space") || Input.GetButtonDown(flyCon))
+        if (Input.GetButtonDown(flyCon))
         {
             Vector2 flyDir = new Vector2(Input.GetAxis(runCon), Input.GetAxis(vertCon));
             flyDir.Normalize();
             rb2D.AddForce(flyDir * flapStren);
-        }
-        else if (Input.GetKey(KeyCode.LeftShift) || Input.GetButton(diveCon))
-        {
-            rb2D.AddForce(transform.up * -diveStren);
-        }
 
-        //Pressing the right or left buttons will move you in that direction
-        if (Input.GetKey("d")) // Right
-        {
-            facing = Direction.RIGHT;
-            rb2D.AddForce(transform.right * moveSpeed);
-        }
-        else if (Input.GetKey("a")) // Left
-        {
-            facing = Direction.LEFT;
-            rb2D.AddForce(transform.right * -moveSpeed);
-        }
-
-        // Using a joystick for movement
-        if (Input.GetAxis(runCon) != 0)
-        {
-            if(Input.GetAxis(runCon) < 0)
-            {
-                facing = Direction.LEFT;
-            }
-            else
-            {
+            if (Input.GetAxis(runCon) > 0)
                 facing = Direction.RIGHT;
-            }
-
-            rb2D.AddForce(transform.right * moveSpeed * Input.GetAxis(runCon));
+            else
+                facing = Direction.LEFT;
         }
 
         // If the bird goes outside of bounds, move it to the other side
@@ -98,65 +69,40 @@ public class BirdController : MonoBehaviour {
         }
 
         // Use the bumpers to dash left and right
-        if (Input.GetButtonDown(RDash))
-        {
-            StartCoroutine(Dash(dashTime, Direction.RIGHT));
-        }
-        else if (Input.GetButtonDown(LDash))
-        {
-            StartCoroutine(Dash(dashTime, Direction.LEFT));
-        }
+        if (Input.GetButtonDown(RDash) || Input.GetButtonDown(LDash))
+            StartCoroutine(Dash(dashTime));
     }
 
-    public IEnumerator Dash(float time, Direction direction)
+    public IEnumerator Dash(float time)
     {
-        bool flip = false;
-        Vector2 oldVel = rb2D.velocity;
-
         if (!dashing)
         {
             dashing = true;
 
-            if (direction == Direction.RIGHT)
-            {
+            if (Input.GetAxis(runCon) > 0)
                 facing = Direction.RIGHT;
-
-                if (facing == Direction.RIGHT)
-                    rb2D.velocity = new Vector2(dashSpeed, rb2D.velocity.y);
-                else
-                {
-                    rb2D.velocity = new Vector2(dashSpeed, rb2D.velocity.y);
-                    flip = true;
-                }
-
-                yield return new WaitForSeconds(time);
-
-                if (flip)
-                    rb2D.velocity = oldVel * -1;
-                else
-                    rb2D.velocity = oldVel;
-            }
-            else if (direction == Direction.LEFT)
-            {
+            else if (Input.GetAxis(runCon) < 0)
                 facing = Direction.LEFT;
 
-                if (facing == Direction.LEFT)
-                    rb2D.velocity = new Vector2(-dashSpeed, rb2D.velocity.y);
-                else
-                {
-                    rb2D.velocity = new Vector2(-dashSpeed, rb2D.velocity.y);
-                    flip = true;
-                }
+            Vector2 dir = new Vector2(Input.GetAxis(runCon), Input.GetAxis(vertCon));
+            rb2D.velocity = dir.normalized * dashSpeed;
 
-                yield return new WaitForSeconds(time);
+            yield return new WaitForSeconds(time);
 
-                if (flip)
-                    rb2D.velocity = oldVel * -1;
-                else
-                    rb2D.velocity = oldVel;
-            }
+            rb2D.velocity = new Vector2(0.0f, 0.0f);
 
             dashing = false;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            if (dashing == true)
+            {
+                print(message: "You have damaged " + collision.gameObject.name);
+            }
         }
     }
 }
