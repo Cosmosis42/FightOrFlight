@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum Direction
 {
@@ -14,6 +15,8 @@ public class BirdController : MonoBehaviour
 	private bool dashing = false;
     public bool grappled = false;
     private bool grapCooldown = false;
+	public bool onGround = true;
+	public float dashCooldown = 2;
 	public float flapStren = 10;
 	public float maxSpeed = 250;
 	public float dashSpeed = 100;
@@ -37,7 +40,7 @@ public class BirdController : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
 
 		// Don't let velocity exceed maxSpeed
@@ -92,11 +95,18 @@ public class BirdController : MonoBehaviour
                 rb2D.simulated = true;
             }
 
-            StartCoroutine(Dash(dashTime));
+            StartCoroutine(Dash(dashTime, dashCooldown));
         }
+
+		// When you die, do stuff
+		if (player.CurrentHp <= 0)
+		{
+			Destroy(this);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		}
 	}
 
-	public IEnumerator Dash(float time)
+	public IEnumerator Dash(float time, float cooldown)
 	{
 		if (!dashing)
 		{
@@ -113,6 +123,8 @@ public class BirdController : MonoBehaviour
 			yield return new WaitForSeconds(time);
 
 			rb2D.velocity = new Vector2(0.0f, 0.0f);
+
+			yield return new WaitForSeconds(cooldown);
 
 			dashing = false;
 		}
@@ -150,7 +162,7 @@ public class BirdController : MonoBehaviour
                     }
                 }
             }
-            print(Input.GetAxis(Grab) + this.name);
+
             if (Input.GetAxis(Grab) != 0)
             {
                 Vector3 contactPoint = collision.contacts[0].point;
@@ -159,7 +171,7 @@ public class BirdController : MonoBehaviour
                 bool top = contactPoint.y > (center.y + (collision.transform.lossyScale.y / 2.25));
                 bool middle = (contactPoint.x < (center.x + collision.transform.lossyScale.x / 2)
                                    && contactPoint.x > center.x - (collision.transform.lossyScale.x / 2));
-                print(top + " " + middle + " " + this.name);
+                
                 if (top && middle)
                 {
                     collision.rigidbody.simulated = false;
@@ -169,5 +181,17 @@ public class BirdController : MonoBehaviour
                 StartCoroutine(collision.gameObject.GetComponent<BirdController>().Grappled(grapTime));
             }
         }
+	}
+
+	private void OnCollisionStay2D(Collision2D collision)
+	{
+		if (collision.gameObject.tag == "Platform")
+			onGround = true;
+	}
+
+	private void OnCollisionExit2D(Collision2D collision)
+	{
+		if (collision.gameObject.tag == "Platform")
+			onGround = false;
 	}
 }
