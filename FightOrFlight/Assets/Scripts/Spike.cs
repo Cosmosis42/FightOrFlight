@@ -24,6 +24,7 @@ public class Spike : MonoBehaviour {
 			transform.SetPositionAndRotation(newPos, transform.rotation);
 
 			rb2D.velocity *= -1;
+			GetComponent<SpriteRenderer>().flipX = true;
 		}
 		else if (transform.position.x < left)
 		{
@@ -31,6 +32,7 @@ public class Spike : MonoBehaviour {
 			transform.SetPositionAndRotation(newPos, transform.rotation);
 
 			rb2D.velocity *= -1;
+			GetComponent<SpriteRenderer>().flipX = false;
 		}
 	}
 
