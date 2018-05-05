@@ -12,6 +12,8 @@ public class Game : MonoBehaviour
 
 	public Player Player2;
 
+	public GameObject featherEffectPrefab;
+
 	void Awake()
 	{
 		Instance = this;
@@ -20,6 +22,7 @@ public class Game : MonoBehaviour
 	void Start()
 	{
 		StartGame();
+
 	}
 
 	void OnDestroy()
@@ -37,5 +40,14 @@ public class Game : MonoBehaviour
 		// Player animation
 	}
 
+	public void DropFeathers(Vector3 position)
+	{
+		Instantiate(featherEffectPrefab, position, Quaternion.identity);
+	}
+
+	public void TestFeathers()
+	{
+		DropFeathers(Vector3.zero);
+	}
 }
 
