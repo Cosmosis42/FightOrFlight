@@ -11,9 +11,15 @@ public class BirdController : MonoBehaviour {
     private Rigidbody2D rb2D;
     private Direction facing = Direction.RIGHT;
     public float flapStren = 10;
+    public float diveStren = 10;
     public float moveSpeed = 10;
     public float maxSpeed = 250;
     public float wallLeft, wallRight, floor, roof, bounciness;
+
+    [Header("Controls")]
+    public string flyCon = "Fly";
+    public string runCon = "Run";
+    public string diveCon = "Dive";
 
     // Use this for initialization
     void Start () {
@@ -27,9 +33,14 @@ public class BirdController : MonoBehaviour {
         rb2D.velocity = Vector3.ClampMagnitude(rb2D.velocity, maxSpeed);
 
         // Pressing space will flap your wings, giving you upward thrust
-        if (Input.GetKeyDown("space"))
+        // Pressing shift will give you downward thrust
+        if (Input.GetKeyDown("space") || Input.GetButtonDown(flyCon))
         {
             rb2D.AddForce(transform.up * flapStren);
+        }
+        else if (Input.GetKey(KeyCode.LeftShift) || Input.GetButton(diveCon))
+        {
+            rb2D.AddForce(transform.up * -diveStren);
         }
 
         //Pressing the right or left buttons will move you in that direction
@@ -42,6 +53,21 @@ public class BirdController : MonoBehaviour {
         {
             facing = Direction.LEFT;
             rb2D.AddForce(transform.right * -moveSpeed);
+        }
+
+        // Using a joystick for movement
+        if (Input.GetAxis(runCon) != 0)
+        {
+            if(Input.GetAxis(runCon) < 0)
+            {
+                facing = Direction.LEFT;
+            }
+            else
+            {
+                facing = Direction.RIGHT;
+            }
+
+            rb2D.AddForce(transform.right * moveSpeed * Input.GetAxis(runCon));
         }
 
         // If the bird goes outside of bounds, move it to the other side
@@ -63,19 +89,5 @@ public class BirdController : MonoBehaviour {
 
             transform.SetPositionAndRotation(newPos, transform.rotation);
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        ContactPoint2D contact;
-        float dot;
-        Vector3 reflection;
-
-        contact = collision.contacts[0];
-        dot = Vector3.Dot(contact.normal, -transform.right);
-        dot *= 2;
-        reflection = contact.normal * dot;
-        reflection = reflection + transform.right;
-        rb2D.velocity = transform.TransformDirection(reflection.normalized * 15.0f);
     }
 }
