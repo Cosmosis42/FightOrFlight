@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flapStren: 100
-  moveSpeed: 20
+  moveSpeed: 8
 --- !u!212 &212350896346125448
 SpriteRenderer:
   m_ObjectHideFlags: 1
