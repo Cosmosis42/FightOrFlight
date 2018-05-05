@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,12 +24,13 @@ public class BirdController : MonoBehaviour {
     public string diveCon = "Dive";
     public string LDash = "LDash";
     public string RDash = "RDash";
+    public string vertCon = "Vertical";
 
     // Use this for initialization
     void Start () {
         rb2D = GetComponent<Rigidbody2D>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
@@ -40,7 +41,9 @@ public class BirdController : MonoBehaviour {
         // Pressing shift will give you downward thrust
         if (Input.GetKeyDown("space") || Input.GetButtonDown(flyCon))
         {
-            rb2D.AddForce(transform.up * flapStren);
+            Vector2 flyDir = new Vector2(Input.GetAxis(runCon), Input.GetAxis(vertCon));
+            flyDir.Normalize();
+            rb2D.AddForce(flyDir * flapStren);
         }
         else if (Input.GetKey(KeyCode.LeftShift) || Input.GetButton(diveCon))
         {
