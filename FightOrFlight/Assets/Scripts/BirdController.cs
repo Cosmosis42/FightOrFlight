@@ -12,10 +12,12 @@ public class BirdController : MonoBehaviour
 	private Rigidbody2D rb2D;
 	private Direction facing = Direction.RIGHT;
 	private bool dashing = false;
+    public bool grappled = false;
+    private bool grapCooldown = false;
 	public float flapStren = 10;
 	public float maxSpeed = 250;
 	public float dashSpeed = 100;
-	public float wallLeft, wallRight, floor, roof, bounciness, dashTime;
+	public float wallLeft, wallRight, floor, roof, bounciness, dashTime, grapTime;
 
 	[Header("References")]
 	public Player player;
@@ -26,6 +28,7 @@ public class BirdController : MonoBehaviour
 	public string LDash = "LDash";
 	public string RDash = "RDash";
 	public string vertCon = "Vertical";
+    public string Grab = "Grab";
 
 	// Use this for initialization
 	void Start()
@@ -74,9 +77,23 @@ public class BirdController : MonoBehaviour
 			transform.SetPositionAndRotation(newPos, transform.rotation);
 		}
 
-		// Use the bumpers to dash left and right
-		if (Input.GetButtonDown(RDash) || Input.GetButtonDown(LDash))
-			StartCoroutine(Dash(dashTime));
+        if (transform.childCount != 0 && Input.GetAxis(Grab) == 0)
+        {
+            transform.GetChild(0).GetComponent<Rigidbody2D>().simulated = true;
+            transform.GetChild(0).parent = null;
+        }
+
+        // Use the bumpers to dash left and right
+        if (Input.GetButtonDown(RDash) || Input.GetButtonDown(LDash))
+        {
+            if (grappled && !grapCooldown)
+            {
+                transform.parent = null;
+                rb2D.simulated = true;
+            }
+
+            StartCoroutine(Dash(dashTime));
+        }
 	}
 
 	public IEnumerator Dash(float time)
@@ -101,26 +118,56 @@ public class BirdController : MonoBehaviour
 		}
 	}
 
+    public IEnumerator Grappled(float time)
+    {
+        grapCooldown = true;
+
+        yield return new WaitForSeconds(time);
+
+        grapCooldown = false;
+    }
+
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
 		if (collision.gameObject.tag == "Player")
 		{
-			if (dashing)
-			{
-				print(message: "You have damaged " + collision.gameObject.name);
+            if (Input.GetAxis(Grab) == 0)
+            {
+                if (dashing)
+                {
+                    print(message: "You have damaged " + collision.gameObject.name);
 
-				var otherPlayer = collision.gameObject.GetComponent<BirdController>();
+                    var otherPlayer = collision.gameObject.GetComponent<BirdController>();
 
-				if (otherPlayer != null)
-				{
-					otherPlayer.player.Attack(player);
+                    if (otherPlayer != null)
+                    {
+                        otherPlayer.player.Attack(player);
 					Game.Instance.DropFeathers(collision.transform.position);
 				}
 				else
 				{
 					Game.Instance.DropFeathers(transform.position);
-				}
-			}
-		}
+                    }
+                }
+            }
+            print(Input.GetAxis(Grab) + this.name);
+            if (Input.GetAxis(Grab) != 0)
+            {
+                Vector3 contactPoint = collision.contacts[0].point;
+                Vector3 center = collision.collider.bounds.center;
+
+                bool top = contactPoint.y > (center.y + (collision.transform.lossyScale.y / 2.25));
+                bool middle = (contactPoint.x < (center.x + collision.transform.lossyScale.x / 2)
+                                   && contactPoint.x > center.x - (collision.transform.lossyScale.x / 2));
+                print(top + " " + middle + " " + this.name);
+                if (top && middle)
+                {
+                    collision.rigidbody.simulated = false;
+                    collision.transform.parent = transform;
+                    collision.gameObject.GetComponent<BirdController>().grappled = true;
+                }
+                StartCoroutine(collision.gameObject.GetComponent<BirdController>().Grappled(grapTime));
+            }
+        }
 	}
 }
