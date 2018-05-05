@@ -12,8 +12,7 @@ public class Player : MonoBehaviour
 	public HpBar HpBar;
 	public StaminaBar StaminaBar;
 
-	// Trigger collider, used for picking up power ups and attacking
-	public Collider Trigger;
+	public BirdController Controller;
 
 	[Header("Stats")]
 	public int MaxHp = 10;
@@ -101,18 +100,6 @@ public class Player : MonoBehaviour
 	void Update()
 	{
 		// Regenerate stamina
-	}
-
-	void OnTriggerEnter(Collider other)
-	{
-		// If powerup then take
-
-		// If player then keep track of player.
-	}
-
-	void OnTriggerExit()
-	{
-
 	}
 }
 

@@ -25,6 +25,7 @@ public class HpBar : MonoBehaviour
 		for (int i = 0; i < _lives.Length; i++)
 		{
 			GameObject indicator = Instantiate(LifeIndicator);
+			indicator.SetActive(true);
 			indicator.transform.SetParent(Container, false);
 			Image image = indicator.GetComponent<Image>();
 			image.sprite = RemainingLife;
