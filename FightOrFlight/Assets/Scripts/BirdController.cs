@@ -36,7 +36,7 @@ public class BirdController : MonoBehaviour {
 
         // Pressing space will flap your wings, giving you upward thrust
         // Pressing shift will give you downward thrust
-        if (Input.GetKeyDown("space") || Input.GetButtonDown(flyCon))
+        if (Input.GetButtonDown(flyCon))
         {
             Vector2 flyDir = new Vector2(Input.GetAxis(runCon), Input.GetAxis(vertCon));
             flyDir.Normalize();
@@ -46,7 +46,6 @@ public class BirdController : MonoBehaviour {
                 facing = Direction.RIGHT;
             else
                 facing = Direction.LEFT;
-
         }
 
         // If the bird goes outside of bounds, move it to the other side
