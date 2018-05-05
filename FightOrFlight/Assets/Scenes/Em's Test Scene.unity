@@ -270,12 +270,22 @@ Prefab:
     - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
         type: 2}
       propertyPath: diveStren
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
         type: 2}
       propertyPath: flapStren
-      value: 125
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
+        type: 2}
+      propertyPath: LDash
+      value: LDash2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
+        type: 2}
+      propertyPath: RDash
+      value: RDash2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 273dfea17158d334497f3686a55380b2, type: 2}
@@ -476,91 +486,6 @@ Prefab:
     - target: {fileID: 4031495674807178, guid: 273dfea17158d334497f3686a55380b2, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: wallLeft
-      value: -22.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: wallRight
-      value: 23
-      objectReference: {fileID: 0}
-    - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: roof
-      value: 13.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: floor
-      value: -13.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: maxSpeed
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: bounciness
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 61437895486840514, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 11f1fdae5333d474abedf65365ca4bbd, type: 2}
-    - target: {fileID: 50775543438973676, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 9d4cedbbf206f234ba595a92e7f965d8, type: 2}
-    - target: {fileID: 50775543438973676, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 50775543438973676, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: m_CollisionDetection
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 50775543438973676, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: m_Interpolate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 50775543438973676, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: m_Simulated
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: flyCon
-      value: Fly1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: runCon
-      value: Run1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: diveCon
-      value: Dive1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: flapStren
-      value: 125
-      objectReference: {fileID: 0}
-    - target: {fileID: 114988996751468424, guid: 273dfea17158d334497f3686a55380b2,
-        type: 2}
-      propertyPath: diveStren
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 273dfea17158d334497f3686a55380b2, type: 2}

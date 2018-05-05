@@ -10,16 +10,20 @@ public enum Direction
 public class BirdController : MonoBehaviour {
     private Rigidbody2D rb2D;
     private Direction facing = Direction.RIGHT;
+    private bool dashing = false;
     public float flapStren = 10;
     public float diveStren = 10;
     public float moveSpeed = 10;
     public float maxSpeed = 250;
-    public float wallLeft, wallRight, floor, roof, bounciness;
+    public float dashSpeed = 100;
+    public float wallLeft, wallRight, floor, roof, bounciness, dashTime;
 
     [Header("Controls")]
     public string flyCon = "Fly";
     public string runCon = "Run";
     public string diveCon = "Dive";
+    public string LDash = "LDash";
+    public string RDash = "RDash";
 
     // Use this for initialization
     void Start () {
@@ -88,6 +92,68 @@ public class BirdController : MonoBehaviour {
             Vector3 newPos = new Vector3(transform.position.x, roof, transform.position.z);
 
             transform.SetPositionAndRotation(newPos, transform.rotation);
+        }
+
+        // Use the bumpers to dash left and right
+        if (Input.GetButtonDown(RDash))
+        {
+            StartCoroutine(Dash(dashTime, Direction.RIGHT));
+        }
+        else if (Input.GetButtonDown(LDash))
+        {
+            StartCoroutine(Dash(dashTime, Direction.LEFT));
+        }
+    }
+
+    public IEnumerator Dash(float time, Direction direction)
+    {
+        bool flip = false;
+        Vector2 oldVel = rb2D.velocity;
+
+        if (!dashing)
+        {
+            dashing = true;
+
+            if (direction == Direction.RIGHT)
+            {
+                facing = Direction.RIGHT;
+
+                if (facing == Direction.RIGHT)
+                    rb2D.velocity = new Vector2(dashSpeed, rb2D.velocity.y);
+                else
+                {
+                    rb2D.velocity = new Vector2(dashSpeed, rb2D.velocity.y);
+                    flip = true;
+                }
+
+                yield return new WaitForSeconds(time);
+
+                if (flip)
+                    rb2D.velocity = oldVel * -1;
+                else
+                    rb2D.velocity = oldVel;
+            }
+            else if (direction == Direction.LEFT)
+            {
+                facing = Direction.LEFT;
+
+                if (facing == Direction.LEFT)
+                    rb2D.velocity = new Vector2(-dashSpeed, rb2D.velocity.y);
+                else
+                {
+                    rb2D.velocity = new Vector2(-dashSpeed, rb2D.velocity.y);
+                    flip = true;
+                }
+
+                yield return new WaitForSeconds(time);
+
+                if (flip)
+                    rb2D.velocity = oldVel * -1;
+                else
+                    rb2D.velocity = oldVel;
+            }
+
+            dashing = false;
         }
     }
 }
