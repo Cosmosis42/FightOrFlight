@@ -97,12 +97,25 @@ public class BirdController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (collision.gameObject.tag == "Player")
         {
             if (dashing == true)
             {
                 print(message: "You have damaged " + collision.gameObject.name);
             }
+
+            //Vector3 contactPoint = collision.contacts[0].point;
+            //Vector3 center = collision.collider.bounds.center;    
+            
+            //bool top = contactPoint.y > (center.y + (collision.transform.lossyScale.y / 2));
+            //bool middle = (contactPoint.x < (center.x + collision.transform.lossyScale.x / 2) 
+            //                   && contactPoint.x > center.x - (collision.transform.lossyScale.x / 2));
+
+            //if (top && middle)
+            //{
+            //    collision.transform.parent = transform;
+            //}
         }
     }
 }
