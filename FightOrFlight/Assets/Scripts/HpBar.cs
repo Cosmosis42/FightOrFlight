@@ -32,7 +32,7 @@ public class HpBar : MonoBehaviour
 		}
 	}
 
-	public void SetCurrentLife(int currentLife, int damage)
+	public void SetCurrentLife(int currentLife)
 	{
 		for (int i = currentLife; i < _lives.Length; i++)
 		{
