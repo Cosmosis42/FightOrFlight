@@ -6,7 +6,8 @@ public class Spike : MonoBehaviour {
 
 	Rigidbody2D rb2D;
 	private Vector3 newPos;
-	public float left, right, speed, vertPos;
+	public float left, right, speed;
+	private float jump;
 
 	private void Start()
 	{
@@ -19,21 +20,18 @@ public class Spike : MonoBehaviour {
 
 		if (transform.position.x > right)
 		{
-			newPos = new Vector3(right, vertPos, transform.position.z);
+			newPos = new Vector3(right, transform.position.y, transform.position.z);
 			transform.SetPositionAndRotation(newPos, transform.rotation);
 
 			rb2D.velocity *= -1;
 		}
 		else if (transform.position.x < left)
 		{
-			newPos = new Vector3(left, vertPos, transform.position.z);
+			newPos = new Vector3(left, transform.position.y, transform.position.z);
 			transform.SetPositionAndRotation(newPos, transform.rotation);
 
 			rb2D.velocity *= -1;
 		}
-
-		newPos = new Vector3(transform.position.x, vertPos, transform.position.z);
-		transform.SetPositionAndRotation(newPos, transform.rotation); 
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)

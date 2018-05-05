@@ -104,6 +104,12 @@ public class BirdController : MonoBehaviour
 			Destroy(this);
 			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
+
+		// MAke the birb face the right way
+		if (facing == Direction.LEFT)
+			GetComponent<SpriteRenderer>().flipX = true;
+		else
+			GetComponent<SpriteRenderer>().flipX = false;
 	}
 
 	public IEnumerator Dash(float time, float cooldown)
