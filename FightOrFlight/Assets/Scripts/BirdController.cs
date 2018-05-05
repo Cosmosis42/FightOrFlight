@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum Direction
 {
@@ -94,6 +95,13 @@ public class BirdController : MonoBehaviour
 
             StartCoroutine(Dash(dashTime));
         }
+
+		// When you die, do stuff
+		if (player.CurrentHp <= 0)
+		{
+			Destroy(this);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		}
 	}
 
 	public IEnumerator Dash(float time)
@@ -150,7 +158,7 @@ public class BirdController : MonoBehaviour
                     }
                 }
             }
-            print(Input.GetAxis(Grab) + this.name);
+
             if (Input.GetAxis(Grab) != 0)
             {
                 Vector3 contactPoint = collision.contacts[0].point;
@@ -159,7 +167,7 @@ public class BirdController : MonoBehaviour
                 bool top = contactPoint.y > (center.y + (collision.transform.lossyScale.y / 2.25));
                 bool middle = (contactPoint.x < (center.x + collision.transform.lossyScale.x / 2)
                                    && contactPoint.x > center.x - (collision.transform.lossyScale.x / 2));
-                print(top + " " + middle + " " + this.name);
+                
                 if (top && middle)
                 {
                     collision.rigidbody.simulated = false;

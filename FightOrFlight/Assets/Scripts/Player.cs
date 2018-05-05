@@ -87,6 +87,19 @@ public class Player : MonoBehaviour
 		ReduceStamina(1);
 	}
 
+	public void SpikeDamage()
+	{
+		// Play animation
+
+		// Get nearby player object.
+
+		// Send attack to player
+		ReduceHp(Damage);
+
+		// Reduce stamina
+		ReduceStamina(1);
+	}
+
 	public void FlapWings()
 	{
 		CurrentStamina -= 1;
