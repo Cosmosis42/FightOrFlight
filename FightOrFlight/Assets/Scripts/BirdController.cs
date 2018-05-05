@@ -15,6 +15,8 @@ public class BirdController : MonoBehaviour
 	private bool dashing = false;
     public bool grappled = false;
     private bool grapCooldown = false;
+	public bool onGround = true;
+	public float dashCooldown = 2;
 	public float flapStren = 10;
 	public float maxSpeed = 250;
 	public float dashSpeed = 100;
@@ -38,7 +40,7 @@ public class BirdController : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
 
 		// Don't let velocity exceed maxSpeed
@@ -93,7 +95,7 @@ public class BirdController : MonoBehaviour
                 rb2D.simulated = true;
             }
 
-            StartCoroutine(Dash(dashTime));
+            StartCoroutine(Dash(dashTime, dashCooldown));
         }
 
 		// When you die, do stuff
@@ -104,7 +106,7 @@ public class BirdController : MonoBehaviour
 		}
 	}
 
-	public IEnumerator Dash(float time)
+	public IEnumerator Dash(float time, float cooldown)
 	{
 		if (!dashing)
 		{
@@ -121,6 +123,8 @@ public class BirdController : MonoBehaviour
 			yield return new WaitForSeconds(time);
 
 			rb2D.velocity = new Vector2(0.0f, 0.0f);
+
+			yield return new WaitForSeconds(cooldown);
 
 			dashing = false;
 		}
@@ -177,5 +181,17 @@ public class BirdController : MonoBehaviour
                 StartCoroutine(collision.gameObject.GetComponent<BirdController>().Grappled(grapTime));
             }
         }
+	}
+
+	private void OnCollisionStay2D(Collision2D collision)
+	{
+		if (collision.gameObject.tag == "Platform")
+			onGround = true;
+	}
+
+	private void OnCollisionExit2D(Collision2D collision)
+	{
+		if (collision.gameObject.tag == "Platform")
+			onGround = false;
 	}
 }
