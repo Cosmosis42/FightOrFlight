@@ -94,4 +94,15 @@ public class BirdController : MonoBehaviour {
             dashing = false;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            if (dashing == true)
+            {
+                print(message: "You have damaged " + collision.gameObject.name);
+            }
+        }
+    }
 }
