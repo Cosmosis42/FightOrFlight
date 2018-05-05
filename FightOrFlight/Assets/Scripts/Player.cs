@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
 	{
 		// If powerup then take
 
-		// If player then keep track of player
+		// If player then keep track of player.
 	}
 
 	void OnTriggerExit()
