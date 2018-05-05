@@ -67,12 +67,15 @@ public class BirdController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Calculate Angle Between the collision point and the player
-        Vector3 dir = transform.position - collision.transform.position;
-        // We then get the opposite (-Vector3) and normalize it
-        dir = -dir.normalized;
-        // And finally we add force in the direction of dir and multiply it by force. 
-        // This will push back the player
-        rb2D.AddForce(dir * bounciness);
+        ContactPoint2D contact;
+        float dot;
+        Vector3 reflection;
+
+        contact = collision.contacts[0];
+        dot = Vector3.Dot(contact.normal, -transform.right);
+        dot *= 2;
+        reflection = contact.normal * dot;
+        reflection = reflection + transform.right;
+        rb2D.velocity = transform.TransformDirection(reflection.normalized * 15.0f);
     }
 }
