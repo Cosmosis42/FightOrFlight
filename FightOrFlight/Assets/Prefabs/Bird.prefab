@@ -79,7 +79,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2.1, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -99,6 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8039b5eb6f9abf4f936fd42fc11f6bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grappled: 0
+  onGround: 1
+  dashCooldown: 2
   flapStren: 200
   maxSpeed: 30
   dashSpeed: 150
@@ -108,11 +111,15 @@ MonoBehaviour:
   roof: 13.25
   bounciness: 300
   dashTime: 0.25
+  grapTime: 0
+  birdState: 0
+  player: {fileID: 0}
   flyCon: Fly1
   runCon: Run1
   LDash: LDash1
   RDash: RDash1
   vertCon: Vertical1
+  Grab: Grab
 --- !u!212 &212350896346125448
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -147,7 +154,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 34856df87e9ab614ebb8ab0ba6d94d0a, type: 3}
+  m_Sprite: {fileID: 21300024, guid: 862871e868396284699f931e48321a56, type: 3}
   m_Color: {r: 0.15543899, g: 0.7927156, b: 0.9191176, a: 1}
   m_FlipX: 0
   m_FlipY: 0

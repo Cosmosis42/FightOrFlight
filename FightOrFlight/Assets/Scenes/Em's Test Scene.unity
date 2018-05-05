@@ -371,7 +371,7 @@ Prefab:
     - target: {fileID: 61437895486840514, guid: 273dfea17158d334497f3686a55380b2,
         type: 2}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 2.4
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 61437895486840514, guid: 273dfea17158d334497f3686a55380b2,
         type: 2}
@@ -1181,6 +1181,20 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &676689983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 676689981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c5e11869e99a4899ee61fe48015f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimation: 0
+  Animator: {fileID: 676689982}
+  birdController: {fileID: 676689980}
 --- !u!1 &775836778 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1012265872691040, guid: 3d820baefdaab3a459c0a29ed955afe1,
@@ -1221,6 +1235,42 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &944287680 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1285768905839862, guid: 273dfea17158d334497f3686a55380b2,
+    type: 2}
+  m_PrefabInternal: {fileID: 185790924}
+--- !u!95 &944287681
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 944287680}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &944287682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 944287680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c5e11869e99a4899ee61fe48015f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimation: 0
+  Animator: {fileID: 0}
+  birdController: {fileID: 185790925}
 --- !u!1001 &1019926070
 Prefab:
   m_ObjectHideFlags: 0

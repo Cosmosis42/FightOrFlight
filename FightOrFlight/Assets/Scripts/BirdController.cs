@@ -21,6 +21,7 @@ public class BirdController : MonoBehaviour
 	public float maxSpeed = 250;
 	public float dashSpeed = 100;
 	public float wallLeft, wallRight, floor, roof, bounciness, dashTime, grapTime;
+    public BirdAnimator.BirdAnimations birdState;
 
 	[Header("References")]
 	public Player player;
@@ -50,7 +51,8 @@ public class BirdController : MonoBehaviour
 		// Pressing shift will give you downward thrust
 		if (Input.GetButtonDown(flyCon))
 		{
-			Vector2 flyDir = new Vector2(Input.GetAxis(runCon), Input.GetAxis(vertCon));
+            birdState = BirdAnimator.BirdAnimations.Flap;
+            Vector2 flyDir = new Vector2(Input.GetAxis(runCon), Input.GetAxis(vertCon));
 			flyDir.Normalize();
 			rb2D.AddForce(flyDir * flapStren);
 
@@ -185,13 +187,22 @@ public class BirdController : MonoBehaviour
 
 	private void OnCollisionStay2D(Collision2D collision)
 	{
-		if (collision.gameObject.tag == "Platform")
-			onGround = true;
-	}
+        if (collision.gameObject.tag == "Platform")
+        {
+            onGround = true;
+            birdState = BirdAnimator.BirdAnimations.Idle;
+        }
+    }
 
 	private void OnCollisionExit2D(Collision2D collision)
 	{
 		if (collision.gameObject.tag == "Platform")
 			onGround = false;
-	}
+        birdState = BirdAnimator.BirdAnimations.Fly;
+    }
+
+    public BirdAnimator.BirdAnimations GetBirdState()
+    {
+        return birdState;
+    }
 }
