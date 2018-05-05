@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
 	public HpBar HpBar;
 	public StaminaBar StaminaBar;
 
+	// Trigger collider, used for picking up power ups and attacking
+	public Collider Trigger;
+
 	[Header("Stats")]
 	public int MaxHp = 10;
 	public int CurrentHp = 10;
