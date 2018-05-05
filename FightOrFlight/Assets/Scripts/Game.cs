@@ -34,7 +34,7 @@ public class Game : MonoBehaviour
 
 	public void RegisterAttack(Player player)
 	{
-		// Figure out if birb is in range.
+		// Figure out if bird is in range.
 		Player other;
 		if (player == Player1)
 			other = Player2;
