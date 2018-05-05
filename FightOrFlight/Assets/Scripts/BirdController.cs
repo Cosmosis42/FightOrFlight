@@ -62,6 +62,9 @@ public class BirdController : MonoBehaviour
 				facing = Direction.LEFT;
 		}
 
+		if (Input.GetButton(flyCon))
+			birdState = BirdAnimator.BirdAnimations.Flap;
+
 		// If the bird goes outside of bounds, move it to the other side
 		if (transform.position.x < wallLeft)
 		{
@@ -203,8 +206,10 @@ public class BirdController : MonoBehaviour
 	private void OnCollisionExit2D(Collision2D collision)
 	{
 		if (collision.gameObject.tag == "Platform")
+		{
 			onGround = false;
-        birdState = BirdAnimator.BirdAnimations.Fly;
+			birdState = BirdAnimator.BirdAnimations.Fly;
+		}
     }
 
     public BirdAnimator.BirdAnimations GetBirdState()
