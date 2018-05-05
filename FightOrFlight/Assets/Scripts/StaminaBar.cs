@@ -1,24 +1,50 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine.UI;
+using UnityEngine;
 
-namespace Assets.Scripts
-{
-	public class StaminaBar
-	{
-		public Slider StaminaSlider;
+public class StaminaBar : MonoBehaviour {
 
-		public void Initialize(float maxStamina)
-		{
-			StaminaSlider.maxValue = maxStamina;
-			StaminaSlider.value = maxStamina;
-		}
+    int staminaBar1;
+    int staminaBar2;
+    int lives1;
+    int lives2;
 
-		public void SetStamina(float currentStamina)
-		{
-			StaminaSlider.value = currentStamina;
-		}
-	}
+    public bool flightMode;
+
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (lives1 == 0)
+        {
+            Winner(2);
+        }
+        if (lives2 == 0)
+        {
+            Winner(1);
+        }
+
+
+        if (!flightMode)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+
+
+    void Winner(int i)
+    {
+
+    }
+
 }
