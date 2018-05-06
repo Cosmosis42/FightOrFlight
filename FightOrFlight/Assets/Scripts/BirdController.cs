@@ -78,7 +78,7 @@ public class BirdController : MonoBehaviour
 			_flapCounter -= Time.deltaTime;
 			if (_flapCounter <= 0)
 			{
-				if (!onGround)
+				if (!onGround && !dead && !hurt)
 					birdState = BirdAnimator.BirdAnimations.Fly;
 				else if (!dead && !hurt)
 					birdState = BirdAnimator.BirdAnimations.Idle;
