@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
 
 	public void Init()
 	{
-		Controller.transform.SetPositionAndRotation(StartingPosition.position, StartingPosition.rotation);
+		//Controller.transform.SetPositionAndRotation(StartingPosition.position, StartingPosition.rotation);
 
 		CurrentHp = MaxHp;
 		CurrentStamina = MaxStamina;
