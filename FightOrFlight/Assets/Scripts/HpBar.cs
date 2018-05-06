@@ -35,9 +35,13 @@ public class HpBar : MonoBehaviour
 
 	public void SetCurrentLife(int currentLife)
 	{
-		for (int i = currentLife; i < _lives.Length; i++)
+		for (int i = 0; i < _lives.Length; i++)
 		{
-			_lives[i].sprite = SpentLife;
+			if (i < currentLife)
+				_lives[i].sprite = RemainingLife;
+			else
+				_lives[i].sprite = SpentLife;
+
 		}
 	}
 

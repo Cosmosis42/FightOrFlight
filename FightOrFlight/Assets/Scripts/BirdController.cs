@@ -49,7 +49,7 @@ public class BirdController : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void FixedUpdate()
+	void Update()
 	{
 
 		// Don't let velocity exceed maxSpeed
@@ -63,7 +63,7 @@ public class BirdController : MonoBehaviour
 			_flapCounter = 0.5f;
 			Vector2 flyDir = new Vector2(Input.GetAxis(runCon), Input.GetAxis(vertCon));
 			flyDir.Normalize();
-			rb2D.AddForce(flyDir * flapStren);
+			rb2D.AddForce(flyDir * player.GetFlapStrength());
 
 			if (Input.GetAxis(runCon) > 0)
 				facing = Direction.RIGHT;
@@ -81,6 +81,18 @@ public class BirdController : MonoBehaviour
 				else
 					birdState = BirdAnimator.BirdAnimations.Idle;
 			}
+		}
+
+		if (dashing)
+		{
+			birdState = BirdAnimator.BirdAnimations.Dash;
+		}
+		else if (birdState == BirdAnimator.BirdAnimations.Dash)
+		{
+			if (!onGround)
+				birdState = BirdAnimator.BirdAnimations.Fly;
+			else
+				birdState = BirdAnimator.BirdAnimations.Idle;
 		}
 
 		// If the bird goes outside of bounds, move it to the other side

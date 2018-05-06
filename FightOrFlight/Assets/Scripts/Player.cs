@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Player : MonoBehaviour
 	public Transform StartingPosition;
 
 	public HpBar HpBar;
-	//public StaminaBar StaminaBar;
+	public Text PowerUpText;
 
 	public BirdController Controller;
 
@@ -22,13 +23,47 @@ public class Player : MonoBehaviour
 	public float CurrentStamina = 10;
 	public float StaminaRegen = 2;
 
+	#region Damage and speed
+	public float FlapStrength = 10;
 	public int Damage = 1;
+
+	public APowerUpEffect ActiveEffect;
+	private float _effectCountDownTimer = 0f;
+
+	public float GetFlapStrength()
+	{
+		if (ActiveEffect is SpeedBoost)
+			return FlapStrength + (float)ActiveEffect.Value;
+		return FlapStrength;
+	}
+
+	public int GetDamage()
+	{
+		if (ActiveEffect is DamageBoost)
+			return Damage + (int)ActiveEffect.Value;
+		return Damage;
+	}
+
+	public void ApplyEffect(APowerUpEffect effect)
+	{
+		ActiveEffect = effect;
+
+		_effectCountDownTimer = ActiveEffect.Duration;
+
+		PowerUpText.text = effect.GetDisplayString();
+	}
+
+
+	#endregion
 
 	#region HP and Stamina
 
 	public void AddHp(int value)
 	{
 		CurrentHp += value;
+
+		if (CurrentHp > MaxHp)
+			CurrentHp = MaxHp;
 
 		// Play relevant effect
 
@@ -38,9 +73,6 @@ public class Player : MonoBehaviour
 	public void ReduceHp(int value)
 	{
 		CurrentHp -= value;
-
-		if (CurrentHp > MaxHp)
-			CurrentHp = MaxHp;
 		// Play relevant effect
 
 		UpdateHpBar();
@@ -49,28 +81,6 @@ public class Player : MonoBehaviour
 	private void UpdateHpBar()
 	{
 		HpBar.SetCurrentLife(CurrentHp);
-	}
-
-	public void AddStamina(float value)
-	{
-		CurrentStamina += value;
-
-		if (CurrentStamina > MaxStamina)
-			CurrentStamina = MaxStamina;
-		// Play relevant animation
-		UpdateStaminaBar();
-	}
-
-	public void ReduceStamina(float value)
-	{
-		CurrentStamina -= value;
-		// Play relevant animation
-		UpdateStaminaBar();
-	}
-
-	private void UpdateStaminaBar()
-	{
-		//StaminaBar.SetStamina(CurrentStamina);
 	}
 	#endregion
 
@@ -81,10 +91,8 @@ public class Player : MonoBehaviour
 		// Get nearby player object.
 
 		// Send attack to player
-		ReduceHp(attacker.Damage);
+		ReduceHp(attacker.GetDamage());
 
-		// Reduce stamina
-		ReduceStamina(1);
 	}
 
 	public void SpikeDamage()
@@ -95,14 +103,6 @@ public class Player : MonoBehaviour
 
 		// Send attack to player
 		ReduceHp(Damage);
-
-		// Reduce stamina
-		ReduceStamina(1);
-	}
-
-	public void FlapWings()
-	{
-		CurrentStamina -= 1;
 	}
 
 	public void Init()
@@ -110,20 +110,21 @@ public class Player : MonoBehaviour
 		Controller.transform.SetPositionAndRotation(StartingPosition.position, StartingPosition.rotation);
 
 		CurrentHp = MaxHp;
-		CurrentStamina = MaxStamina;
 
 		HpBar.Initialize(MaxHp);
-		//StaminaBar.Initialize(MaxStamina);
 	}
 
 	void Update()
 	{
-		// Regenerate stamina
-		if (CurrentStamina < MaxStamina)
+		if (ActiveEffect != null)
 		{
-			var delta = StaminaRegen * Time.deltaTime;
+			_effectCountDownTimer -= Time.deltaTime;
 
-			AddStamina(delta);
+			if (_effectCountDownTimer <= 0)
+			{
+				ActiveEffect = null;
+				PowerUpText.text = string.Empty;
+			}
 		}
 	}
 }

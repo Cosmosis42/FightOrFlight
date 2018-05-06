@@ -8,7 +8,8 @@ public class BirdAnimator : MonoBehaviour
 		Idle,
 		Fly,
 		Flap,
-		Hurt
+		Hurt,
+		Dash,
 	}
 
 	public BirdAnimations currentAnimation;        // Animation that is currently playing.
@@ -37,6 +38,9 @@ public class BirdAnimator : MonoBehaviour
 				break;
 			case BirdAnimations.Hurt:
 				TransitionTo(BirdAnimations.Hurt, "bird_hurt");
+				break;
+			case BirdAnimations.Dash:
+				TransitionTo(BirdAnimations.Dash, "bird_dash");
 				break;
 			default:
 				TransitionTo(BirdAnimations.Idle, "bird_idle");
