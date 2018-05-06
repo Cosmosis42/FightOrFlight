@@ -79,7 +79,7 @@ public class BirdController : MonoBehaviour
 			{
 				if (!onGround)
 					birdState = BirdAnimator.BirdAnimations.Fly;
-				else
+				else if (!dead)
 					birdState = BirdAnimator.BirdAnimations.Idle;
 			}
 		}
