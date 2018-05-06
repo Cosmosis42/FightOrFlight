@@ -479,7 +479,7 @@ MonoBehaviour:
   MaxStamina: 0
   CurrentStamina: 0
   StaminaRegen: 2
-  FlapStrength: 10
+  FlapStrength: 200
   Damage: 1
 --- !u!114 &114273316027086496
 MonoBehaviour:
@@ -888,7 +888,7 @@ MonoBehaviour:
   MaxStamina: 0
   CurrentStamina: 0
   StaminaRegen: 2
-  FlapStrength: 10
+  FlapStrength: 200
   Damage: 1
 --- !u!114 &114974305662649298
 MonoBehaviour:
