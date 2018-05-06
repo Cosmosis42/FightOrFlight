@@ -23,9 +23,11 @@ GameObject:
   - component: {fileID: 61437895486840514}
   - component: {fileID: 50775543438973676}
   - component: {fileID: 114988996751468424}
+  - component: {fileID: 95337632772610250}
+  - component: {fileID: 114106410495360640}
   m_Layer: 0
   m_Name: Bird
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,8 +39,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1285768905839862}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.26, y: -3.08, z: 0.19593947}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -14.27, y: -3.19, z: 0.19593947}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -79,15 +81,46 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.1, y: 2}
+    oldSize: {x: 2.1, y: 1.9}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.1, y: 1.94}
   m_EdgeRadius: 0
+--- !u!95 &95337632772610250
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1285768905839862}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9055b7d72a2849f40be66ffc061897b6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114106410495360640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1285768905839862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c5e11869e99a4899ee61fe48015f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimation: 0
+  Animator: {fileID: 95337632772610250}
+  birdController: {fileID: 114988996751468424}
 --- !u!114 &114988996751468424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grappled: 0
   onGround: 1
-  dashCooldown: 2
+  dashCooldown: 0.5
   flapStren: 200
   maxSpeed: 30
   dashSpeed: 150
@@ -111,7 +144,7 @@ MonoBehaviour:
   roof: 13.25
   bounciness: 300
   dashTime: 0.25
-  grapTime: 0
+  grapTime: 3
   birdState: 0
   player: {fileID: 0}
   flyCon: Fly1
@@ -119,7 +152,18 @@ MonoBehaviour:
   LDash: LDash1
   RDash: RDash1
   vertCon: Vertical1
-  Grab: Grab
+  Grab: Grab1
+  kungFu:
+  - {fileID: 8300000, guid: 370180c71507c1644b62df577caac651, type: 3}
+  - {fileID: 8300000, guid: 53cda79f56db4244f970ec912700a968, type: 3}
+  - {fileID: 8300000, guid: b9e6652154895664fb907ce0fc2be02a, type: 3}
+  - {fileID: 8300000, guid: b899ab53b36b1764393a217cbfd05625, type: 3}
+  miss:
+  - {fileID: 8300000, guid: 71e5a450aec3e5d44ae0e70060d48fef, type: 3}
+  - {fileID: 8300000, guid: 6861d85bba34bd74999ca73df34909fe, type: 3}
+  - {fileID: 8300000, guid: 67cb6ac6acf026a42954920a7994c615, type: 3}
+  - {fileID: 8300000, guid: 7c253df03405cc2448784f209390ec4f, type: 3}
+  - {fileID: 8300000, guid: 58b0350b13070b643ac8819219d90246, type: 3}
 --- !u!212 &212350896346125448
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -154,8 +198,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300024, guid: 862871e868396284699f931e48321a56, type: 3}
-  m_Color: {r: 0.15543899, g: 0.7927156, b: 0.9191176, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 862871e868396284699f931e48321a56, type: 3}
+  m_Color: {r: 0.0610943, g: 0.7034691, b: 0.8308824, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
