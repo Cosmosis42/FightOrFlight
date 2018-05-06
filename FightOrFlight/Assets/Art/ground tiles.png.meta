@@ -5,6 +5,8 @@ licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: leaf
+    21300002: Leaf
+    21300004: Branch
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -89,6 +91,34 @@ TextureImporter:
         y: 36
         width: 19
         height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Leaf
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 181
+        width: 95
+        height: 124
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Branch
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 135
+        width: 161
+        height: 161
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
