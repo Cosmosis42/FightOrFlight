@@ -30,6 +30,28 @@ public class MakeArena : MonoBehaviour
 
 			plat[i].transform.localScale = platSize;
 
+			for (int j = 0; j < i; j++)
+			{
+				if (j != i)
+				{
+					float platDist = plat[j].transform.position.y - plat[i].transform.position.y;
+
+					if (Mathf.Abs(platDist) < player1.transform.localScale.y + 0.25)
+					{
+						if (platDist > 0)
+						{
+							plat[i].transform.SetPositionAndRotation(new Vector2 (plat[i].transform.position.x, 
+								plat[i].transform.position.y + maxSizeY), plat[i].transform.rotation);
+						}
+						else
+						{
+							plat[i].transform.SetPositionAndRotation(new Vector2(plat[i].transform.position.x, 
+								plat[i].transform.position.y - maxSizeY), plat[i].transform.rotation);
+						}
+					}
+				}
+			}
+
 			switch (i)
 			{
 				case 0:
