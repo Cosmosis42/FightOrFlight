@@ -34,12 +34,18 @@ public class BirdController : MonoBehaviour
 	public string vertCon = "Vertical";
 	public string Grab = "Grab";
 
+	[Header("Sounds")]
+	public AudioClip[] kungFu;
+	public AudioClip[] miss;
+	private AudioSource audioSource;
+
 	private float _flapCounter = 0;
 
 	// Use this for initialization
 	void Start()
 	{
 		rb2D = GetComponent<Rigidbody2D>();
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	// Update is called once per frame
@@ -131,9 +137,15 @@ public class BirdController : MonoBehaviour
 
 	public IEnumerator Dash(float time, float cooldown)
 	{
+		int sound;
+
 		if (!dashing)
 		{
 			dashing = true;
+
+			sound = (int)Random.Range(0.0f, miss.Length);
+
+			audioSource.PlayOneShot(miss[sound]);
 
 			if (Input.GetAxis(runCon) > 0)
 				facing = Direction.RIGHT;
@@ -164,6 +176,8 @@ public class BirdController : MonoBehaviour
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
+		int sound;
+
 		if (collision.gameObject.tag == "Player")
 		{
 			if (Input.GetAxis(Grab) == 0)
@@ -171,6 +185,10 @@ public class BirdController : MonoBehaviour
 				if (dashing)
 				{
 					print(message: "You have damaged " + collision.gameObject.name);
+
+					sound = (int)Random.Range(0.0f, kungFu.Length);
+
+					audioSource.PlayOneShot(kungFu[sound]);
 
 					var otherPlayer = collision.gameObject.GetComponent<BirdController>();
 
