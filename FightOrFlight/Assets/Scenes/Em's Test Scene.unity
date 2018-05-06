@@ -1091,7 +1091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftBounds: -22
   rightBounds: 22
-  topBounds: 12
+  topBounds: 10
   botBounds: -12
   minSizeX: 5
   maxSizeX: 45
