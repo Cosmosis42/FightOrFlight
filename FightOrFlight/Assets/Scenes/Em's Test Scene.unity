@@ -321,6 +321,21 @@ Prefab:
       propertyPath: miss.Array.data[1]
       value: 
       objectReference: {fileID: 8300000, guid: 6a617fc43b5270a4aa4194746cb75435, type: 3}
+    - target: {fileID: 212570003214650588, guid: db2e6beeb93610146a4efb73ba8b86f3,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212570003214650588, guid: db2e6beeb93610146a4efb73ba8b86f3,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212570003214650588, guid: db2e6beeb93610146a4efb73ba8b86f3,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: db2e6beeb93610146a4efb73ba8b86f3, type: 2}
   m_IsPrefabParent: 0
@@ -974,6 +989,21 @@ Prefab:
       propertyPath: kungFu.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: a5251cac888571c42a725676924d7278, type: 3}
+    - target: {fileID: 212350896346125448, guid: 273dfea17158d334497f3686a55380b2,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212350896346125448, guid: 273dfea17158d334497f3686a55380b2,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212350896346125448, guid: 273dfea17158d334497f3686a55380b2,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 273dfea17158d334497f3686a55380b2, type: 2}
   m_IsPrefabParent: 0
