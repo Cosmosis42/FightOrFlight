@@ -8,11 +8,14 @@ public class Spike : MonoBehaviour {
 	private Vector3 newPos;
 	public float left, right, speed;
 	private float jump;
+	public AudioClip[] kungFu;
+	private AudioSource audioSource;
 
 	private void Start()
 	{
 		rb2D = GetComponent<Rigidbody2D>();
 		rb2D.velocity = new Vector2(speed, 0.0f);
+		audioSource = GetComponent<AudioSource>();
 	}
 
 	private void FixedUpdate()
@@ -38,9 +41,15 @@ public class Spike : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+		int sound;
+
 		if (collision.gameObject.tag == "Player")
-		{
+		{ 
 			Debug.Log("Spikes have damage " + collision.gameObject.name);
+
+			sound = (int)Random.Range(0.0f, kungFu.Length);
+
+			audioSource.PlayOneShot(kungFu[sound]);
 
 			var player = collision.gameObject.GetComponent<BirdController>();
 
