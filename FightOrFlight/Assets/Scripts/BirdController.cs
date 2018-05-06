@@ -62,15 +62,15 @@ public class BirdController : MonoBehaviour
 				facing = Direction.LEFT;
 		}
 
-		if (birdState == BirdAnimator.BirdAnimations.Flap)
+		if (Input.GetButton(flyCon))
+			birdState = BirdAnimator.BirdAnimations.Flap;
+		else if (birdState == BirdAnimator.BirdAnimations.Flap)
 		{
 			if (!onGround)
 				birdState = BirdAnimator.BirdAnimations.Fly;
 			else
 				birdState = BirdAnimator.BirdAnimations.Idle;
 		}
-		else if (Input.GetButton(flyCon))
-			birdState = BirdAnimator.BirdAnimations.Flap;
 
 		// If the bird goes outside of bounds, move it to the other side
 		if (transform.position.x < wallLeft)
