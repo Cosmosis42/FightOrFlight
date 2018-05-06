@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4894800462301890}
   - component: {fileID: 212003155939565918}
   - component: {fileID: 58934615339543094}
-  - component: {fileID: 114266151324687308}
+  - component: {fileID: 114622846349036602}
   m_Layer: 0
   m_Name: DamageBoost
   m_TagString: Untagged
@@ -57,7 +57,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
---- !u!114 &114266151324687308
+--- !u!114 &114622846349036602
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -65,11 +65,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1116700305352952}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5c01902e93cfa748944e278835adcaf, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a6f1178d402a944ba64229a68e21900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Spawner: {fileID: 0}
-  Value: 100
+  Value: 1
   Duration: 10
 --- !u!212 &212003155939565918
 SpriteRenderer:
