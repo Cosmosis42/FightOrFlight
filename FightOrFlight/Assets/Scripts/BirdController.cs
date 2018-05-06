@@ -14,6 +14,7 @@ public class BirdController : MonoBehaviour
 	private Direction facing = Direction.RIGHT;
 	private bool dashing = false;
 	public bool grappled = false;
+	private bool dead = false;
 	private bool grapCooldown = false;
 	public bool onGround = true;
 	public float dashCooldown = 2;
@@ -78,7 +79,7 @@ public class BirdController : MonoBehaviour
 			{
 				if (!onGround)
 					birdState = BirdAnimator.BirdAnimations.Fly;
-				else
+				else if (!dead)
 					birdState = BirdAnimator.BirdAnimations.Idle;
 			}
 		}
@@ -136,8 +137,9 @@ public class BirdController : MonoBehaviour
 		// When you die, do stuff
 		if (player.CurrentHp <= 0)
 		{
-			Destroy(this);
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			birdState = BirdAnimator.BirdAnimations.Dead;
+			dead = true;
+			StartCoroutine(BecomeDeath(2f));
 		}
 
 		// MAke the birb face the right way
@@ -145,6 +147,16 @@ public class BirdController : MonoBehaviour
 			GetComponent<SpriteRenderer>().flipX = true;
 		else
 			GetComponent<SpriteRenderer>().flipX = false;
+	}
+
+	public IEnumerator BecomeDeath(float time)
+	{
+		yield return new WaitForSeconds(time);
+		if (dead)
+		{
+			Destroy(this);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		}
 	}
 
 	public IEnumerator Dash(float time, float cooldown)
@@ -241,7 +253,8 @@ public class BirdController : MonoBehaviour
 		if (collision.gameObject.tag == "Platform")
 		{
 			onGround = true;
-			birdState = BirdAnimator.BirdAnimations.Idle;
+			if (!dead)
+				birdState = BirdAnimator.BirdAnimations.Idle;
 		}
 	}
 

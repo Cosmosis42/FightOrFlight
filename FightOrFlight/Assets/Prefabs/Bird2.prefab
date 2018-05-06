@@ -9,50 +9,52 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1285768905839862}
+  m_RootGameObject: {fileID: 1350890298004182}
   m_IsPrefabParent: 1
---- !u!1 &1285768905839862
+--- !u!1 &1350890298004182
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4031495674807178}
-  - component: {fileID: 212350896346125448}
-  - component: {fileID: 61437895486840514}
-  - component: {fileID: 50775543438973676}
-  - component: {fileID: 114988996751468424}
-  - component: {fileID: 95337632772610250}
-  - component: {fileID: 114106410495360640}
-  - component: {fileID: 82225322273829728}
+  - component: {fileID: 4070714482870110}
+  - component: {fileID: 212570003214650588}
+  - component: {fileID: 61529846545994792}
+  - component: {fileID: 50132273601944438}
+  - component: {fileID: 114716433663992812}
+  - component: {fileID: 114136569835087332}
+  - component: {fileID: 82005185680859256}
+  - component: {fileID: 82191178024813332}
+  - component: {fileID: 95832278725778890}
+  - component: {fileID: 114615698234752194}
   m_Layer: 0
-  m_Name: Bird
+  m_Name: Bird2
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4031495674807178
+--- !u!4 &4070714482870110
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1285768905839862}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.939808, y: -2.9307077, z: 0}
+  m_GameObject: {fileID: 1350890298004182}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.755436, y: 4.707839, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50775543438973676
+--- !u!50 &50132273601944438
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1285768905839862}
+  m_GameObject: {fileID: 1350890298004182}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -66,12 +68,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &61437895486840514
+--- !u!61 &61529846545994792
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1285768905839862}
+  m_GameObject: {fileID: 1350890298004182}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 11f1fdae5333d474abedf65365ca4bbd, type: 2}
@@ -89,14 +91,14 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.1, y: 1.94}
+  m_Size: {x: 2.38, y: 1.89}
   m_EdgeRadius: 0
---- !u!82 &82225322273829728
+--- !u!82 &82005185680859256
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1285768905839862}
+  m_GameObject: {fileID: 1350890298004182}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -171,13 +173,93 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!95 &95337632772610250
+--- !u!82 &82191178024813332
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1350890298004182}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!95 &95832278725778890
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1285768905839862}
+  m_GameObject: {fileID: 1350890298004182}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 9055b7d72a2849f40be66ffc061897b6, type: 2}
@@ -188,26 +270,40 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114106410495360640
+--- !u!114 &114136569835087332
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1285768905839862}
+  m_GameObject: {fileID: 1350890298004182}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 754c5e11869e99a4899ee61fe48015f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentAnimation: 0
-  Animator: {fileID: 95337632772610250}
-  birdController: {fileID: 114988996751468424}
---- !u!114 &114988996751468424
+  Animator: {fileID: 95337632772610250, guid: 273dfea17158d334497f3686a55380b2, type: 2}
+  birdController: {fileID: 114716433663992812}
+--- !u!114 &114615698234752194
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1285768905839862}
+  m_GameObject: {fileID: 1350890298004182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 754c5e11869e99a4899ee61fe48015f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimation: 0
+  Animator: {fileID: 95832278725778890}
+  birdController: {fileID: 114716433663992812}
+--- !u!114 &114716433663992812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1350890298004182}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8039b5eb6f9abf4f936fd42fc11f6bc, type: 3}
@@ -228,12 +324,12 @@ MonoBehaviour:
   grapTime: 3
   birdState: 0
   player: {fileID: 0}
-  flyCon: Fly1
-  runCon: Run1
-  LDash: LDash1
-  RDash: RDash1
-  vertCon: Vertical1
-  Grab: Grab1
+  flyCon: Fly2
+  runCon: Run2
+  LDash: LDash2
+  RDash: RDash2
+  vertCon: Vertical2
+  Grab: Grab2
   kungFu:
   - {fileID: 8300000, guid: 370180c71507c1644b62df577caac651, type: 3}
   - {fileID: 8300000, guid: 53cda79f56db4244f970ec912700a968, type: 3}
@@ -245,12 +341,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 67cb6ac6acf026a42954920a7994c615, type: 3}
   - {fileID: 8300000, guid: 7c253df03405cc2448784f209390ec4f, type: 3}
   - {fileID: 8300000, guid: 58b0350b13070b643ac8819219d90246, type: 3}
---- !u!212 &212350896346125448
+--- !u!212 &212570003214650588
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1285768905839862}
+  m_GameObject: {fileID: 1350890298004182}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -280,7 +376,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 862871e868396284699f931e48321a56, type: 3}
-  m_Color: {r: 0.0610943, g: 0.7034691, b: 0.8308824, a: 1}
+  m_Color: {r: 0.23275304, g: 0.9044118, b: 0.62648404, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
