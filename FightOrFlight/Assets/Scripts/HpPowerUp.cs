@@ -15,11 +15,11 @@ public class HpPowerUp : MonoBehaviour
 		player.AddHp(Value);
 	}
 
-	public void OnTriggerEnter(Collider other)
+	private void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (other.gameObject.tag == "Player")
+		if (collision.gameObject.tag == "Player")
 		{
-			var playerController = other.gameObject.GetComponent<BirdController>();
+			var playerController = collision.gameObject.GetComponent<BirdController>();
 
 			Apply(playerController.player);
 
