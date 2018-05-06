@@ -21,36 +21,33 @@ public class MakeArena : MonoBehaviour
 			platLocX = Random.Range(leftBounds, rightBounds);
 			platLocY = Random.Range(topBounds, botBounds);
 
-			plat[i] = Instantiate(platFab, new Vector2(platLocX, platLocY), Quaternion.identity);
-
 			platSizeX = Random.Range(minSizeX, maxSizeX);
 			platSizeY = Random.Range(minSizeY, maxSizeY);
+
+			for (int j = 0; j < i; j++)
+			{
+				float platDist = platLocY - plat[j].transform.position.y;
+
+				Debug.Log(Mathf.Abs(platDist) + " " + j);
+
+				if (Mathf.Abs(platDist) < (player1.transform.localScale.y + 1.0))
+				{
+					if (platDist > 0)
+					{
+						platLocY = platLocY + 2;
+					}
+					else
+					{
+						platLocY = platLocY - 2;
+					}
+				}
+			}
+
+			plat[i] = Instantiate(platFab, new Vector2(platLocX, platLocY), Quaternion.identity);
 
 			platSize = new Vector3(platSizeX, platSizeY, 1.0f);
 
 			plat[i].transform.localScale = platSize;
-
-			for (int j = 0; j < i; j++)
-			{
-				if (j != i)
-				{
-					float platDist = plat[j].transform.position.y - plat[i].transform.position.y;
-
-					if (Mathf.Abs(platDist) < player1.transform.localScale.y + 0.25)
-					{
-						if (platDist > 0)
-						{
-							plat[i].transform.SetPositionAndRotation(new Vector2 (plat[i].transform.position.x, 
-								plat[i].transform.position.y + maxSizeY), plat[i].transform.rotation);
-						}
-						else
-						{
-							plat[i].transform.SetPositionAndRotation(new Vector2(plat[i].transform.position.x, 
-								plat[i].transform.position.y - maxSizeY), plat[i].transform.rotation);
-						}
-					}
-				}
-			}
 
 			switch (i)
 			{
