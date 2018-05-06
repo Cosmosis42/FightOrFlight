@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Assets.Scripts;
 using UnityEngine;
 
 public class Game : MonoBehaviour
@@ -11,6 +12,8 @@ public class Game : MonoBehaviour
 	public Player Player1;
 
 	public Player Player2;
+
+	public EndOfGameScreen EndScreen;
 
 	public GameObject featherEffectPrefab;
 
@@ -48,6 +51,18 @@ public class Game : MonoBehaviour
 	public void TestFeathers()
 	{
 		DropFeathers(Vector3.zero);
+	}
+
+	public void EndGame(Player loser)
+	{
+		string winnerString;
+		if (loser == Player1)
+			winnerString = "Player 2 wins!";
+		else
+			winnerString = "Player 1 wins!";
+		EndScreen.gameObject.SetActive(true);
+		EndScreen.Initialize(winnerString);
+
 	}
 }
 

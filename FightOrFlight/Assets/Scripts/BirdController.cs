@@ -140,7 +140,9 @@ public class BirdController : MonoBehaviour
 		{
 			birdState = BirdAnimator.BirdAnimations.Dead;
 			dead = true;
-			StartCoroutine(BecomeDeath(2f));
+			Game.Instance.EndGame(player);
+			enabled = false;
+			//StartCoroutine(BecomeDeath(2f));
 		}
 
 		// MAke the birb face the right way
@@ -165,7 +167,6 @@ public class BirdController : MonoBehaviour
 		if (dead)
 		{
 			Destroy(this);
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
 	}
 
