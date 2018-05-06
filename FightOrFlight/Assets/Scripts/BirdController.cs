@@ -242,7 +242,8 @@ public class BirdController : MonoBehaviour
 		if (collision.gameObject.tag == "Platform")
 		{
 			onGround = true;
-			birdState = BirdAnimator.BirdAnimations.Idle;
+			if (!dead)
+				birdState = BirdAnimator.BirdAnimations.Idle;
 		}
 	}
 
