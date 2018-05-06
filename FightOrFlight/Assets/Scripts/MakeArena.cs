@@ -12,6 +12,7 @@ public class MakeArena : MonoBehaviour
 	public GameObject platFab, player1, player2, hedge;
 	private Vector3 platSize;
 	private float hedgeHeightAdjustment = 1.8f;
+	public GameObject[] spawners;
 
 	// Use this for initialization
 	void Start()
@@ -63,6 +64,14 @@ public class MakeArena : MonoBehaviour
 					hedge.GetComponent<Spike>().right = (platLocX + platSizeX / 2) - (hedge.transform.localScale.x * 2);
 					break;
 			}
+		}
+
+		for (int i = 0; i < spawners.Length; i++)
+		{
+			platLocX = Random.Range(leftBounds, rightBounds);
+			platLocY = Random.Range(topBounds, botBounds);
+
+			Instantiate(spawners[i], new Vector2(platLocX, platLocY), Quaternion.identity);
 		}
 
 		platLocX = Random.Range(leftBounds, rightBounds);
