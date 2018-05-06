@@ -34,6 +34,8 @@ public class BirdController : MonoBehaviour
 	public string vertCon = "Vertical";
 	public string Grab = "Grab";
 
+	private float _flapCounter = 0;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -52,6 +54,7 @@ public class BirdController : MonoBehaviour
 		if (Input.GetButtonDown(flyCon))
 		{
 			birdState = BirdAnimator.BirdAnimations.Flap;
+			_flapCounter = 0.5f;
 			Vector2 flyDir = new Vector2(Input.GetAxis(runCon), Input.GetAxis(vertCon));
 			flyDir.Normalize();
 			rb2D.AddForce(flyDir * flapStren);
@@ -62,14 +65,16 @@ public class BirdController : MonoBehaviour
 				facing = Direction.LEFT;
 		}
 
-		if (Input.GetButton(flyCon))
-			birdState = BirdAnimator.BirdAnimations.Flap;
-		else if (birdState == BirdAnimator.BirdAnimations.Flap)
+		if (birdState == BirdAnimator.BirdAnimations.Flap)
 		{
-			if (!onGround)
-				birdState = BirdAnimator.BirdAnimations.Fly;
-			else
-				birdState = BirdAnimator.BirdAnimations.Idle;
+			_flapCounter -= Time.deltaTime;
+			if (_flapCounter <= 0)
+			{
+				if (!onGround)
+					birdState = BirdAnimator.BirdAnimations.Fly;
+				else
+					birdState = BirdAnimator.BirdAnimations.Idle;
+			}
 		}
 
 		// If the bird goes outside of bounds, move it to the other side
