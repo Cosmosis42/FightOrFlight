@@ -15,6 +15,7 @@ public class BirdController : MonoBehaviour
 	private bool dashing = false;
 	public bool grappled = false;
 	private bool dead = false;
+	private bool hurt = false;
 	private bool grapCooldown = false;
 	public bool onGround = true;
 	public float dashCooldown = 2;
@@ -79,7 +80,7 @@ public class BirdController : MonoBehaviour
 			{
 				if (!onGround)
 					birdState = BirdAnimator.BirdAnimations.Fly;
-				else if (!dead)
+				else if (!dead && !hurt)
 					birdState = BirdAnimator.BirdAnimations.Idle;
 			}
 		}
@@ -135,6 +136,14 @@ public class BirdController : MonoBehaviour
 			GetComponent<SpriteRenderer>().flipX = true;
 		else
 			GetComponent<SpriteRenderer>().flipX = false;
+	}
+
+	public IEnumerator Hurt(float time)
+	{
+		hurt = true;
+		birdState = BirdAnimator.BirdAnimations.Hurt;
+		yield return new WaitForSeconds(time);
+		hurt = false;
 	}
 
 	public IEnumerator BecomeDeath(float time)
@@ -241,7 +250,7 @@ public class BirdController : MonoBehaviour
 		if (collision.gameObject.tag == "Platform")
 		{
 			onGround = true;
-			if (!dead)
+			if (!dead && !hurt)
 				birdState = BirdAnimator.BirdAnimations.Idle;
 		}
 	}

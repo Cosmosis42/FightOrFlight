@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 	public void ReduceHp(int value)
 	{
 		CurrentHp -= value;
-
+		Controller.Hurt(0.5f);
 		if (CurrentHp > MaxHp)
 			CurrentHp = MaxHp;
 		// Play relevant effect
