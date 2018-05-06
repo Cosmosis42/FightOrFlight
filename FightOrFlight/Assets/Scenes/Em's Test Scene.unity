@@ -914,6 +914,7 @@ MonoBehaviour:
   - {fileID: 1778677472029136, guid: f3a6095ba427e684f95bc2f6813c9b2c, type: 2}
   - {fileID: 1742604205092736, guid: 6db77d1d347f89d45ad0b15c42baacfb, type: 2}
   - {fileID: 1706676821996036, guid: d61d64a172a7df1449404e95e1c4a563, type: 2}
+  leaf: {fileID: 1192704954825084, guid: e661f054ebd27784aa3c7acf41c1031c, type: 2}
 --- !u!4 &1730246220
 Transform:
   m_ObjectHideFlags: 0
