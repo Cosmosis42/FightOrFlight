@@ -153,7 +153,7 @@ public class BirdController : MonoBehaviour
 	public IEnumerator Hurt(float time)
 	{
 		hurt = true;
-		Debug.Log("OW")
+		Debug.Log("OW");
 		birdState = BirdAnimator.BirdAnimations.Hurt;
 		yield return new WaitForSeconds(time);
 		hurt = false;
