@@ -85,7 +85,7 @@ public class BirdController : MonoBehaviour
 			}
 		}
 
-		if (dashing)
+		if (dashing && !hurt)
 		{
 			birdState = BirdAnimator.BirdAnimations.Dash;
 		}
