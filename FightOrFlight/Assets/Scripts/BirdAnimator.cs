@@ -9,6 +9,7 @@ public class BirdAnimator : MonoBehaviour
 		Fly,
 		Flap,
 		Hurt,
+		Dash,
 		Dead
 	}
 
@@ -38,6 +39,9 @@ public class BirdAnimator : MonoBehaviour
 				break;
 			case BirdAnimations.Hurt:
 				TransitionTo(BirdAnimations.Hurt, "bird_hurt");
+				break;
+			case BirdAnimations.Dash:
+				TransitionTo(BirdAnimations.Dash, "bird_dash");
 				break;
 			case BirdAnimations.Dead:
 				TransitionTo(BirdAnimations.Dead, "bird_dead");

@@ -39,7 +39,8 @@ public class PowerUpSpawner : MonoBehaviour
 	{
 		GameObject obj = Instantiate(PowerUpPrefab);
 		obj.transform.SetPositionAndRotation(transform.position, Quaternion.identity);
-		var powerUp = obj.GetComponent<HpPowerUp>();
+		var powerUp = obj.GetComponent<APowerUp>();
+		Debug.Log(powerUp);
 		powerUp.Spawner = this;
 
 	}
