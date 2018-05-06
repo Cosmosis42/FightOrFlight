@@ -57,9 +57,9 @@ public class Game : MonoBehaviour
 	{
 		string winnerString;
 		if (loser == Player1)
-			winnerString = "Player 2 wins!";
+			winnerString = "PLAYER 2 WINS!";
 		else
-			winnerString = "Player 1 wins!";
+			winnerString = "PLAYER 1 WINS!";
 		EndScreen.gameObject.SetActive(true);
 		EndScreen.Initialize(winnerString);
 
