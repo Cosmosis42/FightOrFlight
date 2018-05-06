@@ -14,7 +14,7 @@ public class MakeArena : MonoBehaviour
 	private float hedgeHeightAdjustment = 1.8f;
 	public GameObject[] spawners;
 	public GameObject leaf;
-	private int numLeaves = 100;
+	public int numLeaves = 100;
 
 	// Use this for initialization
 	void Start()
