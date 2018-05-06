@@ -79,7 +79,7 @@ public class BirdController : MonoBehaviour
 			{
 				if (!onGround)
 					birdState = BirdAnimator.BirdAnimations.Fly;
-				else
+				else if (!dead)
 					birdState = BirdAnimator.BirdAnimations.Idle;
 			}
 		}
@@ -242,7 +242,8 @@ public class BirdController : MonoBehaviour
 		if (collision.gameObject.tag == "Platform")
 		{
 			onGround = true;
-			birdState = BirdAnimator.BirdAnimations.Idle;
+			if (!dead)
+				birdState = BirdAnimator.BirdAnimations.Idle;
 		}
 	}
 
