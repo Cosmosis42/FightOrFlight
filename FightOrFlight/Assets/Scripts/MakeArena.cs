@@ -7,7 +7,7 @@ public class MakeArena : MonoBehaviour
 
 	public float leftBounds, rightBounds, topBounds, botBounds;
 	public float minSizeX, maxSizeX, minSizeY, maxSizeY;
-	private float platLocX, platLocY, platSizeX, platSizeY, leafLocY, leafLocX;
+	private float platLocX, platLocY, platSizeX, platSizeY, leafLocY, leafLocX, leafRotZ;
 	GameObject[] plat = new GameObject[4];
 	public GameObject platFab, player1, player2, hedge;
 	private Vector3 platSize;
@@ -69,10 +69,14 @@ public class MakeArena : MonoBehaviour
 
 			for (int j = 0; j < numLeaves; j++)
 			{
-				leafLocX = Random.Range(platLocX - platSizeX / 2, platLocX + platSizeX / 2);
-				leafLocY = Random.Range(platLocY - platSizeY / 2, platLocY + platSizeY / 2);
+				leafRotZ = Random.Range(0.0f, 360.0f);
 
-				Instantiate(leaf, new Vector2(leafLocX, leafLocY), Quaternion.identity);
+				leafLocX = Random.Range(platLocX - platSizeX / 2, platLocX + platSizeX / 2);
+				leafLocY = Random.Range(platLocY - platSizeY / 1.75f, platLocY + platSizeY / 1.75f);
+
+				GameObject tempLeaf = Instantiate(leaf, new Vector2(leafLocX, leafLocY), Quaternion.identity);
+
+				tempLeaf.transform.Rotate(Vector3.forward * leafRotZ);
 			}
 		}
 
@@ -98,10 +102,14 @@ public class MakeArena : MonoBehaviour
 
 		for (int i = 0; i < numLeaves; i++)
 		{
-			leafLocX = Random.Range(platLocX - platSizeX / 2, platLocX + platSizeX / 2);
+			leafRotZ = Random.Range(0.0f, 360.0f);
+
+			leafLocX = Random.Range(platLocX - platSizeX / 1.75f, platLocX + platSizeX / 1.75f);
 			leafLocY = Random.Range(platLocY - platSizeY / 2, platLocY + platSizeY / 2);
 
-			Instantiate(leaf, new Vector2(leafLocX, leafLocY), Quaternion.identity);
+			GameObject tempLeaf = Instantiate(leaf, new Vector2(leafLocX, leafLocY), Quaternion.identity);
+
+			tempLeaf.transform.Rotate(Vector3.forward * leafRotZ);
 		}
 	}
 }
