@@ -126,13 +126,8 @@ public class BirdController : MonoBehaviour
 		if (player.CurrentHp <= 0)
 		{
 			birdState = BirdAnimator.BirdAnimations.Dead;
+			dead = true;
 			StartCoroutine(BecomeDeath(2f));
-			if (dead)
-			{
-				Destroy(this);
-				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-			}
-			
 		}
 
 		// MAke the birb face the right way
@@ -145,7 +140,11 @@ public class BirdController : MonoBehaviour
 	public IEnumerator BecomeDeath(float time)
 	{
 		yield return new WaitForSeconds(time);
-		dead = true;
+		if (dead)
+		{
+			Destroy(this);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		}
 	}
 
 	public IEnumerator Dash(float time, float cooldown)
