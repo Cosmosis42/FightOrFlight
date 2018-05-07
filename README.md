@@ -3,6 +3,8 @@ Fight or Flight game for FaxJam 2018
 
 Fowl Play is a game that was produced by Anna Marie LeBlanc, Bjarmi Bergsteinsson, Dylan Humber, Emmerson Ryan, and Sophie Twardus at the Halifax FaxJam 2018. Given the prompt of "Fight or Flight", we decided to make a bird-fighting arcade-style game with inspirations from classics such as Joust. Fowl Play is a 1 vs 1 competitive arcade brawler. Each player controls a bird, flying and dashing around the screen. The first player to bring their opponents health to zero is the winner.
 
+Fowl Play placed third place out of thirteen contestants.
+
 # Controls
 Each player must use a controller/gamepad to control their bird.
 
